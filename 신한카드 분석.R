@@ -1,66 +1,65 @@
-#ÆĞÅ°Áö ¼³Ä¡ ¹× ¶óÀÌºê·¯¸® Ãß°¡
+#íŒ¨í‚¤ì§€ ì„¤ì¹˜ ë° ë¼ì´ë¸ŒëŸ¬ë¦¬ ì¶”ê°€
 install.packages("dplyr")
 library(dplyr)
 install.packages("readxl")
 library(readxl)
 
-#µ¥ÀÌÅÍ ºÒ·¯¿À±â
-s <- readxl::read_excel(path="C:/data_fi/±İÀ¶´ëÈ¸_½ÅÇÑÀºÇà.xlsx",
+#ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°
+s <- readxl::read_excel(path="C:/data_fi/ê¸ˆìœµëŒ€íšŒ_ì‹ í•œì€í–‰.xlsx",
                         sheet = "finance_data",
                         col_names=TRUE)
 summary(s)
 
-#Áßº¹°ªÈ®ÀÎ
+#ì¤‘ë³µê°’í™•ì¸
 duplicates <- s %>% duplicated() %>% table()
 duplicates
 
-#°áÃø°ªÈ®ÀÎ
-table(is.na(s$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ))
-table(is.na(s$Áö¿ª±¸))
-table(is.na(s$±âÁØ³â¿ù))
-table(is.na(s$½Å¿ë´ëÃâ±İ¾×))
-table(is.na(s$´ãº¸´ëÃâ±İ¾×))
-table(is.na(s$ÁÖÅÃ´ëÃâ±İ¾×))
+#ê²°ì¸¡ê°’í™•ì¸
+table(is.na(s$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ))
+table(is.na(s$ì§€ì—­êµ¬))
+table(is.na(s$ê¸°ì¤€ë…„ì›”))
+table(is.na(s$ì‹ ìš©ëŒ€ì¶œê¸ˆì•¡))
+table(is.na(s$ë‹´ë³´ëŒ€ì¶œê¸ˆì•¡))
+table(is.na(s$ì£¼íƒëŒ€ì¶œê¸ˆì•¡))
 
-#ÇÊ¿äÇÑ µ¥ÀÌÅÍ ÃßÃâ
-card <-s %>% filter(°¡¸ÍÁ¡¸ÅÃâÀÔ±İ!=0) %>% select(±âÁØ³â¿ù, Áö¿ª±¸, °¡¸ÍÁ¡¸ÅÃâÀÔ±İ, ½Å¿ë´ëÃâ±İ¾×, ´ãº¸´ëÃâ±İ¾×, ÁÖÅÃ´ëÃâ±İ¾×)
+#í•„ìš”í•œ ë°ì´í„° ì¶”ì¶œ
+card <-s %>% filter(ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ!=0) %>% select(ê¸°ì¤€ë…„ì›”, ì§€ì—­êµ¬, ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ, ì‹ ìš©ëŒ€ì¶œê¸ˆì•¡, ë‹´ë³´ëŒ€ì¶œê¸ˆì•¡, ì£¼íƒëŒ€ì¶œê¸ˆì•¡)
 
-#´ëÃâÃÑÇÕº¯¼ö Ãß°¡ ¹× ¹Ì¸®º¸±â
+#ëŒ€ì¶œì´í•©ë³€ìˆ˜ ì¶”ê°€ ë° ë¯¸ë¦¬ë³´ê¸°
 card<-card %>%
-  mutate(´ëÃâÃÑÇÕ = ½Å¿ë´ëÃâ±İ¾×+´ãº¸´ëÃâ±İ¾×+ÁÖÅÃ´ëÃâ±İ¾×) %>%
-  head
-summary(card) ###¿À·ù°¡ °è¼Ó »ı±â´Â °Í °°Àº,,,,,,,
+  mutate(ëŒ€ì¶œì´í•© = ì‹ ìš©ëŒ€ì¶œê¸ˆì•¡+ë‹´ë³´ëŒ€ì¶œê¸ˆì•¡+ì£¼íƒëŒ€ì¶œê¸ˆì•¡)
+summary(card)
 
-#µ¥ÀÌÅÍ ¿ä¾à ¹× ÀÌ»óÄ¡ Á¦°Å Àü »óÀÚ±×¸²
-summary(card$´ëÃâÃÑÇÕ)
-summary(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ)
-boxplot(card$´ëÃâÃÑÇÕ)
-boxplot(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ)
+#ë°ì´í„° ìš”ì•½ ë° ì´ìƒì¹˜ ì œê±° ì „ ìƒìê·¸ë¦¼
+summary(card$ëŒ€ì¶œì´í•©)
+summary(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ)
+boxplot(card$ëŒ€ì¶œì´í•©)
+boxplot(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ)
 
-#°áÃø°ª°³¼ö È®ÀÎ
-which(card$´ëÃâÃÑÇÕ>boxplot(card$´ëÃâÃÑÇÕ)$stats[5,1] + 1.5*IQR(card$´ëÃâÃÑÇÕ)) ##¾øÀ½
-which(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ>boxplot(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ)$stats[5,1] + 1.5*IQR(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ)) ##¾øÀ½
-which(card$´ëÃâÃÑÇÕ<boxplot(card$´ëÃâÃÑÇÕ)$stats[1,1] - 1.5*IQR(card$´ëÃâÃÑÇÕ)) ##¾øÀ½
-which(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ<boxplot(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ)$stats[1,1] - 1.5*IQR(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ))
+#ê²°ì¸¡ê°’ê°œìˆ˜ í™•ì¸
+which(card$ëŒ€ì¶œì´í•©>boxplot(card$ëŒ€ì¶œì´í•©)$stats[5,1] + 1.5*IQR(card$ëŒ€ì¶œì´í•©)) ##ì—†ìŒ
+which(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ>boxplot(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ)$stats[5,1] + 1.5*IQR(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ)) ##ì—†ìŒ
+which(card$ëŒ€ì¶œì´í•©<boxplot(card$ëŒ€ì¶œì´í•©)$stats[1,1] - 1.5*IQR(card$ëŒ€ì¶œì´í•©)) ##ì—†ìŒ
+which(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ<boxplot(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ)$stats[1,1] - 1.5*IQR(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ))
 
-#°áÃø°ªÁ¦°Å ¹× »óÀÚ±×¸²
-card <-card[-which(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ<boxplot(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ)$stats[1,1] - 1.5*IQR(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ)),]
-boxplot(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ)
-boxplot(card$°¡¸ÍÁ¡¸ÅÃâÀÔ±İ)$stats
+#ê²°ì¸¡ê°’ì œê±° ë° ìƒìê·¸ë¦¼
+card <-card[-which(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ<boxplot(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ)$stats[1,1] - 1.5*IQR(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ)),]
+boxplot(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ)
+boxplot(card$ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ)$stats
 
-#Áö¿ª±¸, ±âÁØ³â¿ù·Î ¹­±â
+#ì§€ì—­êµ¬, ê¸°ì¤€ë…„ì›”ë¡œ ë¬¶ê¸°
 card %>%
-  group_by(Áö¿ª±¸, ±âÁØ³â¿ù) %>%
-  summarize(mean_´ëÃâ = mean(´ëÃâÃÑÇÕ))
-
-card %>%
-  group_by(Áö¿ª±¸, ±âÁØ³â¿ù) %>%
-  summarize(min_´ëÃâ = min(´ëÃâÃÑÇÕ))
+  group_by(ì§€ì—­êµ¬, ê¸°ì¤€ë…„ì›”) %>%
+  summarize(mean_ëŒ€ì¶œ = mean(ëŒ€ì¶œì´í•©))
 
 card %>%
-  group_by(Áö¿ª±¸, ±âÁØ³â¿ù) %>%
-  summarize(max_´ëÃâ = max(´ëÃâÃÑÇÕ))
+  group_by(ì§€ì—­êµ¬, ê¸°ì¤€ë…„ì›”) %>%
+  summarize(min_ëŒ€ì¶œ = min(ëŒ€ì¶œì´í•©))
 
 card %>%
-  group_by(Áö¿ª±¸, ±âÁØ³â¿ù) %>%
-  summarize(med_´ëÃâ = median(´ëÃâÃÑÇÕ))
+  group_by(ì§€ì—­êµ¬, ê¸°ì¤€ë…„ì›”) %>%
+  summarize(max_ëŒ€ì¶œ = max(ëŒ€ì¶œì´í•©))
+
+card %>%
+  group_by(ì§€ì—­êµ¬, ê¸°ì¤€ë…„ì›”) %>%
+  summarize(med_ëŒ€ì¶œ = median(ëŒ€ì¶œì´í•©))
