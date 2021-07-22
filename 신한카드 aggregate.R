@@ -8,7 +8,7 @@ install.packages("readxl")
 library(readxl)
 
 
-shin <- readxl::read_excel(path="C:/data_fi/±İÀ¶´ëÈ¸_½ÅÇÑÀºÇà.xlsx",
+shin <- readxl::read_excel(path="C:/data_fi/ê¸ˆìœµëŒ€íšŒ_ì‹ í•œì€í–‰.xlsx",
                         sheet = "finance_data",
                         col_names=TRUE)
 
@@ -18,17 +18,25 @@ head(shin)
 
 
 shin <- shin %>%
-  mutate(´ëÃâÃÑÇÕ = ½Å¿ë´ëÃâ±İ¾×+´ãº¸´ëÃâ±İ¾×)
+  mutate(ëŒ€ì¶œì´í•© = ì‹ ìš©ëŒ€ì¶œê¸ˆì•¡+ë‹´ë³´ëŒ€ì¶œê¸ˆì•¡)
 
-shin <- shin %>% filter(°¡¸ÍÁ¡¸ÅÃâÀÔ±İ!=0&´ëÃâÃÑÇÕ!=0) %>% dplyr::select(±âÁØ³â¿ù, Áö¿ª±¸, °¡¸ÍÁ¡¸ÅÃâÀÔ±İ, ´ëÃâÃÑÇÕ)
+shin <- shin %>% filter(ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ!=0&ëŒ€ì¶œì´í•©!=0) %>% dplyr::select(ê¸°ì¤€ë…„ì›”, ì§€ì—­êµ¬, ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ, ëŒ€ì¶œì´í•©)
 head(shin)
 summary(shin)
 
-card <- aggregate(´ëÃâÃÑÇÕ~±âÁØ³â¿ù+°¡¸ÍÁ¡¸ÅÃâÀÔ±İ, shin, mean)
+card <- aggregate(ëŒ€ì¶œì´í•©~ê¸°ì¤€ë…„ì›”+ê°€ë§¹ì ë§¤ì¶œì…ê¸ˆ, shin, mean)
 
-card_201903 <- card %>% filter(±âÁØ³â¿ù==201903)
-card_201909 <- card %>% filter(±âÁØ³â¿ù==201909)
-card_202003 <- card %>% filter(±âÁØ³â¿ù==202003)
-card_202009 <- card %>% filter(±âÁØ³â¿ù==202009)
-card_202103 <- card %>% filter(±âÁØ³â¿ù==202103)
+
+![image](https://user-images.githubusercontent.com/87364080/126675888-8a610ab1-0778-4c17-b37d-4cab15050dd2.png)
+
+
+
+card_201903 <- card %>% filter(ê¸°ì¤€ë…„ì›”==201903)
+
+![image](https://user-images.githubusercontent.com/87364080/126675969-0ece06b8-772e-4bc3-acf7-580cfd16b197.png)
+
+card_201909 <- card %>% filter(ê¸°ì¤€ë…„ì›”==201909)
+card_202003 <- card %>% filter(ê¸°ì¤€ë…„ì›”==202003)
+card_202009 <- card %>% filter(ê¸°ì¤€ë…„ì›”==202009)
+card_202103 <- card %>% filter(ê¸°ì¤€ë…„ì›”==202103)
 
